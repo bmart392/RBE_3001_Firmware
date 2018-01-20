@@ -2,14 +2,23 @@
 
 void StatusServer::event(float * packet){
 
- // cast packet
-	uint8_t * buff =(uint8_t *) packet;
+	  /*
+	   * ======= PART 2: Generate a response to be sent back to MATLAB =============
+	   */
 
-	/**
+	  // we will be using the same memory area in which the incoming packet was stored,
+	  // however, we need to perform a type cast first (for convenience).
+	  uint8_t* buff = (uint8_t*) packet;
+
+	  // re-initialize the packet to all zeros
+	  for(int i = 4; i < 64;i++)
+	      buff[i]=8;
+
+	  /**
 	   * The following loop reads sensor data (encoders ticks, joint velocities and
 	   * force readings) and writes it in the response packet.
 	   */
-	  for(int i = 1; i < myPumberOfPidChannels + 1; i++)
+	  for(int i = 0; i < myPumberOfPidChannels; i++)
 	    {
 	      float position = myPidObjects[i]->GetPIDPosition();
 	      float velocity = myPidObjects[i]->getVelocity();
