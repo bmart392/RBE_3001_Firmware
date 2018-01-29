@@ -18,6 +18,7 @@
 //Coms
 #include "coms/PidServer.h"
 #include "coms/StatusServer.h"
+#include "coms/PidConfigServer.h"
 // DEFINES
 #define REV2
 //#define REV1
