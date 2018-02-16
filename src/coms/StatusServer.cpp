@@ -9,8 +9,9 @@ for (int = 0; i < myPumberOfPidChannels; i++) {
 	float captureForcePacket = captureForcePacket + packet[(i*3)+2];
 }
 
-// Declare a boolean variable to hold if a force reading is requested
-bool captureForce = captureForcePacket;
+// Declare a boolean variable to hold if a force reading is requested by the
+// the status packet. A 1 in the first digit following the torque sample space
+bool captureForce = (myPumberOfPidChannels*3)+1;
 
 	  /*
 	   * ======= PART 2: Generate a response to be sent back to MATLAB =============
