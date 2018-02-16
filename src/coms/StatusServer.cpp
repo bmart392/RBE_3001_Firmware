@@ -2,6 +2,16 @@
 
 void StatusServer::event(float * packet){
 
+float captureForcePacket;
+
+// Read from the status packet if a force reading is being requested
+for (int = 0; i < myPumberOfPidChannels; i++) {
+	float captureForcePacket = captureForcePacket + packet[(i*3)+2];
+}
+
+// Declare a boolean variable to hold if a force reading is requested
+bool captureForce = captureForcePacket;
+
 	  /*
 	   * ======= PART 2: Generate a response to be sent back to MATLAB =============
 	   */
@@ -22,7 +32,26 @@ void StatusServer::event(float * packet){
 	    {
 	      float position = myPidObjects[i]->GetPIDPosition();
 	      float velocity = myPidObjects[i]->getVelocity();
-	      float torque   = myPidObjects[i]->loadCell->read();
+
+				// Capture Torque Readings
+	      float torque;
+
+	      /* If a force reading is requested from the status packet, return an
+	       * average reading calculated from num_samples worth of samples. Else
+	       * return an instantaneous force reading
+	       */
+	      int num_samples = 25;
+
+	      if (captureForce) {
+
+	        // Collect num_samples samples and return the averaged torque readings
+	        for (int i = 0; i < num_samples; i++) {
+	          float sumTorque += myPidObjects[i]->loadCell->read();
+	          torque = sumTorque/num_samples;
+	        }
+	      } else {
+	        torque   = myPidObjects[i]->loadCell->read();
+	      }
 
 	      packet[(i*3)+0] = position;
 	      packet[(i*3)+1] = velocity;
