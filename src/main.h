@@ -19,6 +19,7 @@
 #include "coms/PidServer.h"
 #include "coms/StatusServer.h"
 #include "coms/PidConfigServer.h"
+#include "coms/TorqueServer.h"
 // DEFINES
 #define REV2
 //#define REV1

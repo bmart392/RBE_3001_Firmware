@@ -1,23 +1,26 @@
-#ifndef  StatusServer_H
-#define StatusServer_H
+#ifndef TorqueServer_H
+#define TorqueServer_H
 #include <PID_Bowler.h>
 #include <PacketEvent.h>
 #include "../drivers/MyPid.h"
 #include <cmath>        // std::abs
 
-#define STATUS_SERVER_ID 42
+#define TORQUE_SERVER_ID 25
 
-class StatusServer: public PacketEventAbstract{
+class TorqueServer: public PacketEventAbstract{
 
 private:
 
   PIDimp ** myPidObjects;    // array of PidServers - one for each joint
   int myPumberOfPidChannels;
+  int num_samples = 25;
+  float offsetTorques[3] = { 0.0025522, 0.003001, 0.0031228 }; // in Newtons
+  float scaleTorque = 178.5;
 
 public:
   // Packet ID needs to be set
-   StatusServer (PIDimp ** pidObjects, int numberOfPidChannels)
-   : PacketEventAbstract( STATUS_SERVER_ID)
+   TorqueServer (PIDimp ** pidObjects, int numberOfPidChannels)
+   : PacketEventAbstract( TORQUE_SERVER_ID)
 	 {
 	   myPidObjects = pidObjects;
 	   myPumberOfPidChannels = numberOfPidChannels;
