@@ -16,26 +16,27 @@ void GripperServer::event(float * buffer)
 
 	/*
 	*	Gripper : The first element in the 15x1 array is either a 1 or a 0.
-	*	If the gripper receives a 1, the gripper opens. If the gripper
-	*	receives a 0, the gripper closes.
+	*	If the gripper receives a 0, the gripper opens. If the gripper
+	*	receives a 1, the gripper closes.
 	*
 	*/
+
 	wantedPosition = buffer[0];
 
-	if (wantedPosition == 1)
+if (wantedPosition == 0)
 	{
 		for(int i=0; i<100; i++)
 		{
-			myServo = i/100.0;
+			myServo->write(i/100.0);
 			wait(0.01);
 		}
 		currentPosition = wantedPosition;
 	}
-	else // if (wantedPosition == 0)
+	else // if (wantedPosition == 1)
 	{
 		for(int i=100; i>0; i--)
 		{
-			myServo = i/100.0;
+			myServo->write(i/100.0);
 			wait(0.01);
 		}
 		currentPosition = wantedPosition;

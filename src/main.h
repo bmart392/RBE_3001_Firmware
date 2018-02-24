@@ -20,6 +20,7 @@
 #include "coms/StatusServer.h"
 #include "coms/PidConfigServer.h"
 #include "coms/TorqueServer.h"
+#include "coms/GripperServer.h"
 // DEFINES
 #define REV2
 //#define REV1
