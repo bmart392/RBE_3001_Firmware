@@ -23,7 +23,7 @@ void TorqueServer::event(float * packet) {
 		}
 
 		torque = torque / num_samples;
-		packet[i] = ((torque - (offsetTorques[i] * scaleTorque)) / scaleTorque);
+		packet[i] = ((torque - offsetTorques[i]) / scaleTorque[i]);
 
 		torque = 0;
 	}
