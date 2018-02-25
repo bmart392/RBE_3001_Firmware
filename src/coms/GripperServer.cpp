@@ -25,7 +25,7 @@ void GripperServer::event(float * buffer)
 
 if (wantedPosition == 0)
 	{
-		for(int i=0; i<100; i++)
+		for(int i=30; i<70; i++)
 		{
 			myServo->write(i/100.0);
 			wait(0.01);
@@ -34,7 +34,7 @@ if (wantedPosition == 0)
 	}
 	else // if (wantedPosition == 1)
 	{
-		for(int i=100; i>0; i--)
+		for(int i=70; i>30; i--)
 		{
 			myServo->write(i/100.0);
 			wait(0.01);
