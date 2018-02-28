@@ -13,7 +13,7 @@ private:
 
   PIDimp ** myPidObjects;    // array of PidServers - one for each joint
   int myPumberOfPidChannels;
-  int num_samples = 25;
+  float num_samples = 200;
   float offsetTorques[3] = { 0.44629, 0.51972, 0.48689 }; // in Newtons
   float scaleTorque[3] = {178.5,-178.5,178.5};
 
