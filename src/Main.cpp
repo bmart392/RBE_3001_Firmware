@@ -20,7 +20,7 @@
 #define  DOFs  3     // this macro defines the number of joints of the robotic arm
 //#define  DUMMYMODE   // this macro selects the running mode - see instructions above
 
-//#define  DEBUG_      // if defined, this macro enables the printing of debug
+#define  DEBUG_      // if defined, this macro enables the printing of debug
 // statements to the serial port - which can be read with PUTTY
 
 /*
@@ -34,7 +34,7 @@ HIDSimplePacket coms;      // HID packet handlers
 // of the robot's joints 
 // float homePosition[3] = {26.5,-1114.25,-380.75};
 // float homePosition[3] = {1412.2, 3100, -60.55};
-float homePosition[3] = {1413, -1000, -553};
+float homePosition[3] = {1451, -1064, -498};
 
 void runPid() {
 	// update all positions fast and together
@@ -137,25 +137,12 @@ int main() {
 
 	coms.attach(new PidServer(pid, DOFs));
 	coms.attach(new StatusServer(pid, DOFs));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	coms.attach(new PidConfigServer(pid, DOFs));
+	coms.attach(new TorqueServer(pid, DOFs));
+
+	Servo myServo(GRIPPER_SERVO, 5);
+
+	coms.attach(new GripperServer(&myServo));
 
 #ifdef DEBUG_
 	printf("\r\n\r\n Initialization complete. \r\n\r\n");
